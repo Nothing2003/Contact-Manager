@@ -1,16 +1,29 @@
-<div th:fragment="parant">
-  <p>
-    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quam vero debitis
-    expedita, repellat maxime iure vel ad voluptates odit aliquam dolorem
-    voluptatem officiis exercitationem eaque magni dolores iste reprehenderit
-    accusamus?
-  </p>
-</div>
-<div th:fragment="son">
-  <p style="color: brown">
-    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quam vero debitis
-    expedita, repellat maxime iure vel ad voluptates odit aliquam dolorem
-    voluptatem officiis exercitationem eaque magni dolores iste reprehenderit
-    accusamus?
-  </p>
-</div>
+<!DOCTYPE html>
+<html
+  lang="en"
+  th:fragment="parent(content,title,script)"
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title th:replace="${title}">Base Page</title>
+    <link rel="stylesheet" data-th-href="@{'/CSS/output.css'}" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <main>
+      <div data-th-replace=""></div>
+      <div class="p-4">
+        <section data-th-replace="${content}"></section>
+      </div>
+    </main>
+    <footer>footer</footer>
+    <!--javaScript-->
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+    <th:block data-th-replace="${script}"></th:block>
+  </body>
+</html>
