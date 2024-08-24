@@ -20,8 +20,10 @@
     />
   </head>
   <body class="h-screen dark:bg-gray-900 dark:text-white">
-    <div th:replace="~{navbar :: navbardefault}"></div>
-    <div class="p-4">
+    <div>
+      <div th:replace="~{navbar :: navbardefault}"></div>
+    </div>
+    <div class="p-5 px-4">
       <section data-th-replace="${content}"></section>
     </div>
     <footer>footer</footer>
