@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html
+  class="dark"
   lang="en"
   th:fragment="parent(content,title,script)"
   xmlns:th="http://www.thymeleaf.org"
@@ -14,13 +15,11 @@
       rel="stylesheet"
     />
   </head>
-  <body>
-    <main>
-      <div data-th-replace=""></div>
-      <div class="p-4">
-        <section data-th-replace="${content}"></section>
-      </div>
-    </main>
+  <body class="h-screen dark:bg-gray-900 dark:text-white">
+    <div th:replace="~{navbar :: navbardefault}"></div>
+    <div class="p-4">
+      <section data-th-replace="${content}"></section>
+    </div>
     <footer>footer</footer>
     <!--javaScript-->
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
