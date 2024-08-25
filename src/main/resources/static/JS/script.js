@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 function changeTheme(){
 document.querySelector('html').classList.add(current);
-const change= document.querySelector('#theme_change');
+let change= document.querySelector('#theme_change');
 change.addEventListener("click",()=>{console.log("change")
    const old=current;
     if(current=='dark'){

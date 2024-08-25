@@ -1,11 +1,25 @@
 package com.cm.cm2.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.cm.cm2.entities.User;
+import com.cm.cm2.forms.UserForm;
+import com.cm.cm2.services.UserService;
 
 @Controller
 public class PageController {
+
+    @Autowired
+    private UserService userService;
+
+    public PageController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping(value = "/home")
     public String home() {
@@ -35,8 +49,24 @@ public class PageController {
     }
 
     @GetMapping(value = "/register")
-    public String registerPage() {
+    public String registerPage(Model model) {
+        UserForm userForm = new UserForm();
+        model.addAttribute("userForm", userForm);
+
         return "register";
     }
 
+    @PostMapping("/doRegister")
+    public String doRegisterHandaler(@ModelAttribute UserForm userForm) {
+        User user = new User();
+        user.setName(userForm.getName());
+        user.setEmail(userForm.getEmail());
+        user.setPassword(userForm.getPassword());
+        user.setAbout(userForm.getAbout());
+        user.setPhoneNo(userForm.getPhoneNo());
+        user.setProfilePic("https://th.bing.com/th/id/R.19fa7497013a87bd77f7adb96beaf768?rik=144XvMigWWj2bw&riu=http%3a%2f%2fwww.pngall.com%2fwp-content%2fuploads%2f5%2fUser-Profile-PNG-High-Quality-Image.png&ehk=%2bat%2brmqQuJrWL609bAlrUPYgzj%2b%2f7L1ErXRTN6ZyxR0%3d&risl=&pid=ImgRaw&r=0");
+        User saveUser = userService.saveUser(user);
+        System.out.print(saveUser);
+        return "redirect:/register";
+    }
 }

@@ -11,7 +11,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @Data
 @Entity
 @Table
@@ -28,6 +30,7 @@ public class User {
     private String about;
     @Column(columnDefinition = "TEXT", length = 10000)
     private String profilePic;
+    private String phoneNo;
     private boolean enable = false;
     private boolean emailVefied = false;
     private boolean phoneVerified = false;

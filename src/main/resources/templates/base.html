@@ -20,13 +20,21 @@
     />
   </head>
   <body class="h-screen dark:bg-gray-900 dark:text-white">
-    <div>
-      <div th:replace="~{navbar :: navbardefault}"></div>
-    </div>
-    <div class="p-5 px-4">
-      <section data-th-replace="${content}"></section>
-    </div>
-    <footer>footer</footer>
+    <header>
+      <div>
+        <div th:replace="~{navbar :: navbardefault}"></div>
+      </div>
+
+      <div></div>
+    </header>
+    <br />
+    <main>
+      <div class="p-4 px-6 py-8 m-10">
+        <br />
+        <div data-th-replace="${content}"></div>
+      </div>
+    </main>
+    <!-- <footer>footer</footer> -->
     <!--javaScript-->
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
     <script th:src="@{'/JS/script.js'}"></script>
