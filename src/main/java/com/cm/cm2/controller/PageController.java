@@ -16,7 +16,6 @@ import com.cm.cm2.services.UserService;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 @Controller
@@ -88,12 +87,6 @@ public class PageController {
         System.out.print(saveUser);
         return "redirect:/register";
     }
-    @PostMapping("/")
-    public String postMethodName(@RequestBody String entity) {
-        //TODO: process POST request
-        
-        return entity;
-    }
-    
+  
 
 }
