@@ -17,7 +17,6 @@ import com.cm.cm2.services.UserService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
-
 @Controller
 public class PageController {
 
@@ -60,6 +59,11 @@ public class PageController {
         return "login";
     }
 
+    // @PostMapping(value = "/login")
+    // public String loginPagepost() {
+    //     return "login";
+    // }
+
     @GetMapping(value = "/register")
     public String registerPage(Model model) {
         UserForm userForm = new UserForm();
@@ -87,6 +91,5 @@ public class PageController {
         System.out.print(saveUser);
         return "redirect:/register";
     }
-  
 
 }

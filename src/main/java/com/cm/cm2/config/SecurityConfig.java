@@ -31,8 +31,6 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 
-        httpSecurity.csrf(AbstractHttpConfigurer::disable);
-
         httpSecurity.authorizeHttpRequests(authorize -> {
             authorize.requestMatchers("/user/**").authenticated();
             authorize.anyRequest().permitAll();
@@ -40,11 +38,17 @@ public class SecurityConfig {
         httpSecurity.formLogin((formLogin) -> {
             formLogin.loginPage("/login");
             formLogin.loginProcessingUrl("/authenticate");
-            formLogin.defaultSuccessUrl("/user/profile");
-            formLogin.failureForwardUrl("/login?error=true");
+            formLogin.defaultSuccessUrl("/user/dashbaord");
+            // formLogin.failureForwardUrl("/login?error=true");
             formLogin.usernameParameter("email");
             formLogin.passwordParameter("password");
 
+        });
+
+        httpSecurity.csrf(AbstractHttpConfigurer::disable);
+        httpSecurity.logout(logoutCustomizer -> {
+            logoutCustomizer.logoutUrl("/logout");
+            logoutCustomizer.logoutSuccessUrl("/login?logout==true");
         });
         return httpSecurity.build();
     }
