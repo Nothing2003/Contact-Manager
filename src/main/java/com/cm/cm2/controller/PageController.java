@@ -21,7 +21,7 @@ import jakarta.validation.Valid;
 public class PageController {
 
     @Autowired
-    private UserService userService;
+    private final UserService userService;
 
     public PageController(UserService userService) {
         this.userService = userService;
@@ -63,7 +63,6 @@ public class PageController {
     // public String loginPagepost() {
     //     return "login";
     // }
-
     @GetMapping(value = "/register")
     public String registerPage(Model model) {
         UserForm userForm = new UserForm();

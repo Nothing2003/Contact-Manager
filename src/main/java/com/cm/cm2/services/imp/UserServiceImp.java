@@ -23,7 +23,7 @@ public class UserServiceImp implements UserService {
     private UserRepo userRepo;
     @Autowired
     private PasswordEncoder passwordEncoder;
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
     public User saveUser(User user) {

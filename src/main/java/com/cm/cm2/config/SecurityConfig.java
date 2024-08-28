@@ -10,7 +10,6 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
 import com.cm.cm2.services.imp.SCUDS;
 
 @Configuration
@@ -18,6 +17,8 @@ public class SecurityConfig {
 
     @Autowired
     public SCUDS scuds;
+    @Autowired
+    private OAuthAuthenicationScuccessHandler oAuthAuthenicationScuccessHandler;
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
@@ -38,8 +39,7 @@ public class SecurityConfig {
         httpSecurity.formLogin((formLogin) -> {
             formLogin.loginPage("/login");
             formLogin.loginProcessingUrl("/authenticate");
-            formLogin.defaultSuccessUrl("/user/dashbaord");
-            // formLogin.failureForwardUrl("/login?error=true");
+            formLogin.defaultSuccessUrl("/user/profile");
             formLogin.usernameParameter("email");
             formLogin.passwordParameter("password");
 
@@ -50,6 +50,11 @@ public class SecurityConfig {
             logoutCustomizer.logoutUrl("/logout");
             logoutCustomizer.logoutSuccessUrl("/login?logout==true");
         });
+        httpSecurity.oauth2Login(oauth2LoginCustomizer -> {
+            oauth2LoginCustomizer.loginPage("/login");
+            oauth2LoginCustomizer.successHandler(oAuthAuthenicationScuccessHandler);
+        }
+        );
         return httpSecurity.build();
     }
 
