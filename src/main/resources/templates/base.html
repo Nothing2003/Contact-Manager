@@ -21,17 +21,23 @@
     />
   </head>
   <body class="h-screen dark:bg-gray-900 dark:text-white">
-    <header>
-      <div>
-        <div th:replace="~{navbar :: navbardefault}"></div>
-      </div>
+    <div></div>
+    <div th:if="${loggedInUser}">
+      <div
+        class="bottom-6"
+        data-th-replace="~{user/userNavbar::user-navbar}"
+      ></div>
+    </div>
 
-      <div></div>
-    </header>
-    <br />
-    <main>
-      <div class="p-4 px-6 py-8 m-10">
-        <br />
+    <div th:unless="${loggedInUser}">
+      <div th:replace="~{navbar :: navbardefault}"></div>
+
+    </div>
+    <div th:if="${loggedInUser}">
+      <div class="mb-10" th:replace="~{user/sidebar :: sidebar1}"></div>
+    </div>
+
+    <main class="mt-9">
         <div data-th-replace="${content}"></div>
       </div>
     </main>

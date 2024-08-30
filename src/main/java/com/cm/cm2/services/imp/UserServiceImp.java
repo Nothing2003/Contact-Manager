@@ -3,13 +3,11 @@ package com.cm.cm2.services.imp;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import com.cm.cm2.entities.User;
 import com.cm.cm2.helper.AppCon;
 import com.cm.cm2.helper.ResourceNotFoundException;
@@ -80,6 +78,11 @@ public class UserServiceImp implements UserService {
     @Override
     public List<User> getAllUser() {
         return userRepo.findAll();
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        return userRepo.findByEmail(email).orElse(null);
     }
 
 }
