@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+
 import com.cm.cm2.services.imp.SCUDS;
 
 @Configuration
@@ -45,7 +46,6 @@ public class SecurityConfig {
 
         });
 
-        httpSecurity.csrf(AbstractHttpConfigurer::disable);
         httpSecurity.logout(logoutCustomizer -> {
             logoutCustomizer.logoutUrl("/logout");
             logoutCustomizer.logoutSuccessUrl("/login?logout==true");
@@ -55,6 +55,8 @@ public class SecurityConfig {
             oauth2LoginCustomizer.successHandler(oAuthAuthenicationScuccessHandler);
         }
         );
+
+        httpSecurity.csrf(AbstractHttpConfigurer::disable);
         return httpSecurity.build();
     }
 

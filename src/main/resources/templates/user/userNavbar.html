@@ -1,7 +1,7 @@
 <div th:fragment="user-navbar">
   <header>
     <nav
-      class="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 left-0 right-0 start-0 border-b border-gray-200 dark:border-gray-600 sm:pl-64"
+      class="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 left-0 right-0 start-0 border-b border-gray-200 dark:border-gray-600"
     >
       <div
         class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
@@ -30,7 +30,7 @@
         </button>
         <a
           th:href="@{'/'}"
-          class="flex items-center space-x-3 rtl:space-x-reverse"
+          class="flex items-center space-x-3 rtl:space-x-reverse sm:pl-64"
         >
           <img
             th:src="@{'/images/contacts.png'}"

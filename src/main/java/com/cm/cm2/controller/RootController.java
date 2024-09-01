@@ -15,10 +15,9 @@ import com.cm.cm2.services.UserService;
 @ControllerAdvice
 public class RootController {
 
-    @Autowired
     private final UserService userServiceimp;
 
-    RootController(UserService userServiceimp) {
+    public RootController(UserService userServiceimp) {
         this.userServiceimp = userServiceimp;
     }
 
@@ -26,8 +25,8 @@ public class RootController {
 
     @ModelAttribute
     public void addLoggedInUserInfo(Model model, Authentication authentication) {
-        if(authentication==null){
-            return ;
+        if (authentication == null) {
+            return;
         }
         String userName = Helper.getEmailOfLoginUser(authentication);
         logger.info(userName);

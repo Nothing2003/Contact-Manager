@@ -25,6 +25,8 @@ public class Contact {
     private String description;
     private String websiteLink;
     private String LinkedInLink;
+    private boolean favorite = false;
+
     @ManyToOne
     private User user;
 
