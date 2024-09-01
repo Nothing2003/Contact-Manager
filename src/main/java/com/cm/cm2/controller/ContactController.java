@@ -77,7 +77,7 @@ public class ContactController {
     @RequestMapping
     public String viewContact(
             @RequestParam(value = "page", defaultValue = "0") int page,
-            @RequestParam(value = "size", defaultValue = "5") int size,
+            @RequestParam(value = "size", defaultValue = AppCon.Page_Size + "") int size,
             @RequestParam(value = "sortBy", defaultValue = "name") String sortBy,
             @RequestParam(value = "direction", defaultValue = "asc") String direction,
             Model model, Authentication authentication) {
@@ -87,4 +87,33 @@ public class ContactController {
         return "user/contacts";
     }
 
+    @GetMapping("/search")
+    public String searchHandaler(
+            @RequestParam("field") String field,
+            @RequestParam("keyword") String value,
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "size", defaultValue = AppCon.Page_Size + "") int size,
+            @RequestParam(value = "sortBy", defaultValue = "name") String sortBy,
+            @RequestParam(value = "direction", defaultValue = "asc") String direction,
+            Authentication authentication,
+            Model model) {
+        Page<Contact> pageContacts = null;
+        if (field.equalsIgnoreCase("all")) {
+            pageContacts = contactService.getByUser(userService.getUserByEmail(Helper.getEmailOfLoginUser(authentication)), page, size, sortBy, direction);
+
+        } else if (field.equalsIgnoreCase("name")) {
+            pageContacts = contactService.searchByName(value, page, size, sortBy, direction, userService.getUserByEmail(Helper.getEmailOfLoginUser(authentication)));
+        } else if (field.equalsIgnoreCase("phone")) {
+            pageContacts = contactService.searchByPhoneNumber(value, page, size, sortBy, direction, userService.getUserByEmail(Helper.getEmailOfLoginUser(authentication)));
+        } else if (field.equalsIgnoreCase("email")) {
+            pageContacts = contactService.searchByEmail(value, page, size, sortBy, direction, userService.getUserByEmail(Helper.getEmailOfLoginUser(authentication)));
+        }
+        model.addAttribute("contacts", pageContacts);
+        model.addAttribute("pagesize", AppCon.Page_Size);
+        model.addAttribute("valuefield", field);
+        model.addAttribute("type", value);
+        model.addAttribute("pagesize", AppCon.Page_Size);
+
+        return "user/search";
+    }
 }

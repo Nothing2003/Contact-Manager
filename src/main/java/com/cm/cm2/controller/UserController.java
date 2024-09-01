@@ -1,7 +1,5 @@
 package com.cm.cm2.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,8 +17,6 @@ public class UserController {
     public UserController(UserService userServiceimp) {
         this.userServiceimp = userServiceimp;
     }
-
-    private final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @GetMapping(value = "/dashbaord")
     public String userDashbaord() {

@@ -49,11 +49,6 @@ public class ContactServiceImp implements ContactService {
         contactRepo.deleteById(id);
     }
 
-    @Override
-    public List<Contact> searchByName(String name, String email, String phoneNumber) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
     @SuppressWarnings("unchecked")
     @Override
     public List<Contact> getByUserId(String id) {
@@ -65,5 +60,20 @@ public class ContactServiceImp implements ContactService {
     public Page<Contact> getByUser(User user, int page, int size, String sortBy, String direction) {
 
         return contactRepo.findByUser(user, PageRequest.of(page, size, direction.equals("desc") ? Sort.by(sortBy).descending() : Sort.by(sortBy).ascending()));
+    }
+
+    @Override
+    public Page<Contact> searchByName(String name, int page, int size, String sortBy, String direction, User user) {
+        return contactRepo.findByUserAndNameContaining(user, name, PageRequest.of(page, size, direction.equals("desc") ? Sort.by(sortBy).descending() : Sort.by(sortBy).ascending()));
+    }
+
+    @Override
+    public Page<Contact> searchByEmail(String email, int page, int size, String sortBy, String direction, User user) {
+        return contactRepo.findByUserAndEmailContaining(user, email, PageRequest.of(page, size, direction.equals("desc") ? Sort.by(sortBy).descending() : Sort.by(sortBy).ascending()));
+    }
+
+    @Override
+    public Page<Contact> searchByPhoneNumber(String phoneNumber, int page, int size, String sortBy, String direction, User user) {
+        return contactRepo.findByUserAndPhoneNumberContaining(user, phoneNumber, PageRequest.of(page, size, direction.equals("desc") ? Sort.by(sortBy).descending() : Sort.by(sortBy).ascending()));
     }
 }

@@ -14,7 +14,7 @@ import com.cm.cm2.services.ImageService;
 @Service
 public class ImageServiceImp implements ImageService {
 
-    private Cloudinary cloudinary;
+    private final Cloudinary cloudinary;
 
     public ImageServiceImp(Cloudinary cloudinary) {
         this.cloudinary = cloudinary;
@@ -34,7 +34,6 @@ public class ImageServiceImp implements ImageService {
             ));
             return this.getURLFromPublicId(fileName);
         } catch (IOException e) {
-            e.printStackTrace();
             return null;
         }
 

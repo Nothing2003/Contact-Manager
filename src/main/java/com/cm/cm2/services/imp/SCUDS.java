@@ -10,7 +10,7 @@ import com.cm.cm2.repsitories.UserRepo;
 @Service
 public class SCUDS implements UserDetailsService {
 
-    private UserRepo userRepo;
+    private final UserRepo userRepo;
 
     public SCUDS(UserRepo userRepo) {
         this.userRepo = userRepo;

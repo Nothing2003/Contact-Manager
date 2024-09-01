@@ -18,10 +18,14 @@ public interface ContactService {
 
     void deleteContact(String id);
 
-    List<Contact> searchByName(String name, String email, String phoneNumber);
+    Page<Contact> searchByName(String name, int page, int size, String sortBy, String direction, User user);
+
+    Page<Contact> searchByEmail(String email, int page, int size, String sortBy, String direction, User user);
+
+    Page<Contact> searchByPhoneNumber(String phoneNumber, int page, int size, String sortBy, String direction, User user);
 
     List<Contact> getByUserId(String id);
 
-    Page<Contact> getByUser(User user,int page, int size,  String sortBy, String direction);
+    Page<Contact> getByUser(User user, int page, int size, String sortBy, String direction);
 
 }
