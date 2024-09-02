@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html
   lang="en"
-  th:replace="~{base::parent(~{::#content},~{::title},~{ })}"
+  th:replace="~{base::parent(~{::#content},~{::title},~{::script})}"
   xmlns:th="http://www.thymeleaf.org"
 >
   >
@@ -143,9 +143,12 @@
                       <a href="">
                         <i class="fa-regular fa-pen-to-square"></i>
                       </a>
-                      <a href="">
+                      <button
+                        th:data-id="${c.contactId}"
+                        th:onclick="loadContactData(this.getAttribute('data-id'))"
+                      >
                         <i class="fa-solid fa-eye"></i>
-                      </a>
+                      </button>
                     </td>
                     <td class="px-3 py-4">
                       <div th:if="*{favorite}">
@@ -199,7 +202,9 @@
             No Result Found
           </h1>
         </div>
+        <div th:replace="~{user/contact_models::contentFragment}"></div>
       </div>
     </div>
+    <script th:src="@{'/JS/contact.js'}"></script>
   </body>
 </html>
