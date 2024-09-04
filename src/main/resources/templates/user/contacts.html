@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html
   lang="en"
   th:replace="~{base::parent(~{::#content},~{::title},~{::script})}"
@@ -137,9 +136,9 @@
                       </div>
                     </td>
                     <td class="px-6 py-4">
-                      <a href="">
+                      <button th:data-id="${c.contactId}" id="deleteButton">
                         <i class="fa-solid fa-trash"></i>
-                      </a>
+                      </button>
                       <a href="">
                         <i class="fa-regular fa-pen-to-square"></i>
                       </a>

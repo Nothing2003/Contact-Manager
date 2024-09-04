@@ -40,8 +40,45 @@ async function loadContactData(id) {
         document.getElementById('contact_phone').innerHTML=data.phoneNumber;
         document.getElementById('contact_address').innerHTML=data.address;
         document.getElementById('contact_description').innerHTML=data.contact_description;
+        if(data.websiteLink!=null){
+
+            document.getElementById('contact_web').href=data.websiteLink;
+            document.getElementById('contact_web_text').innerHTML=data.websiteLink;
+        }else{
+            document.getElementById('contact_web').href=" ";
+            document.getElementById('contact_web_text').innerHTML="None";  
+        }
+        if(data.LinkedInLink!=null){
+
+            document.getElementById('contact_link').href=data.LinkedInLink;
+            document.getElementById('contact_link_text').innerHTML=data.LinkedInLink;
+        }
+        else{
+            document.getElementById('contact_link').href=" ";
+            document.getElementById('contact_link_text').innerHTML="None";
+        }
         openContactModel();
         } catch (error) {
             console.log("Error : ",error);
+        }
+        document.getElementById('deleteButton').addEventListener('click', function() {
+            const id = this.getAttribute('data-id');
+            deleteContact(id);
+        });
+    
+        function deleteContact(id) {
+            Swal.fire({
+                title: "Do you want to delete the contact?",
+                showCancelButton: true,
+                confirmButtonText: "Delete",
+             
+              }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                  Swal.fire("Saved!", "", "success");
+                } else if (result.isDenied) {
+                  Swal.fire("Changes are not saved", "", "info");
+                }
+              });
         }
 }
