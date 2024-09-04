@@ -22,4 +22,9 @@ public class ApiController {
     public Contact getContact(@PathVariable String contactId) {
         return contactService.getContactById(contactId);
     }
+
+    @GetMapping("/contacts/delete/{contactId}")
+    public void getDelete(@PathVariable("contactId") String contactId) {
+        contactService.deleteContact(contactId);
+    }
 }

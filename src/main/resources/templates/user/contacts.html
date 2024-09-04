@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html
   lang="en"
   th:replace="~{base::parent(~{::#content},~{::title},~{::script})}"
@@ -136,7 +137,10 @@
                       </div>
                     </td>
                     <td class="px-6 py-4">
-                      <button th:data-id="${c.contactId}" id="deleteButton">
+                      <button
+                        th:data-id="${c.contactId}"
+                        th:onclick="deleteContactData(this.getAttribute('data-id'))"
+                      >
                         <i class="fa-solid fa-trash"></i>
                       </button>
                       <a href="">
@@ -202,6 +206,9 @@
           </h1>
         </div>
         <div th:replace="~{user/contact_models::contentFragment}"></div>
+        <div
+          th:replace="~{user/contactDeleteModule::contentFragmentdelete}"
+        ></div>
       </div>
     </div>
     <script th:src="@{'/JS/contact.js'}"></script>
