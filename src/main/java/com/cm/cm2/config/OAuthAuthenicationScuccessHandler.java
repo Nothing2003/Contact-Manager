@@ -16,6 +16,7 @@ import com.cm.cm2.entities.Providers;
 import com.cm.cm2.entities.User;
 import com.cm.cm2.helper.AppCon;
 import com.cm.cm2.repsitories.UserRepo;
+
 import java.util.List;
 
 import jakarta.servlet.ServletException;
@@ -52,7 +53,7 @@ public class OAuthAuthenicationScuccessHandler implements AuthenticationSuccessH
 
             user1.setEmail(oathUser.getAttribute("email").toString());
             user1.setName(oathUser.getAttribute("name").toString());
-            user1.setProfilePic(oathUser.getAttribute("picture").toString());
+            user1.setProfilePic(oathUser.getAttribute("picture").toString() != null ? oathUser.getAttribute("picture").toString() : "/images/image.png");
             user1.setPassword(
                     "password"
             );
@@ -74,8 +75,8 @@ public class OAuthAuthenicationScuccessHandler implements AuthenticationSuccessH
 
             user1.setEmail(email != null ? email : login + "@gmail.com");
             user1.setPassword("password");
-            user1.setProfilePic(avatarUrl != null ? avatarUrl : "defaultAvatarUrl");
-            user1.setName(login != null ? login : "defaultLoginName");
+            user1.setProfilePic(avatarUrl != null ? avatarUrl : "/images/image.png");
+            user1.setName(login != null ? login : "User Name");
             user1.setProvider((Providers.GITHUB));
             user1.setEnable(true);
             user1.setEmailVefied(true);

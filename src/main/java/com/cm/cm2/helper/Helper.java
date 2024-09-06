@@ -26,7 +26,7 @@ public class Helper {
             System.out.println("Getting email from regular authentication");
             return userDetails.getUsername();
         } else {
-            System.out.println("Unknown principal type: " + principal.getClass().getName());
+            System.out.println("Unknown principal type. ");
         }
 
         return "";
@@ -34,6 +34,11 @@ public class Helper {
 
     public static String getLinkForEmailVarification(String emailToken) {
         String link = "http://localhost:8080/auth/varify-email?token=" + emailToken;
+        return link;
+    }
+
+    public static String getLinkForForgetPasswoed(String Token) {
+        String link = "http://localhost:8080/auth/changePassword?token=" + Token;
         return link;
     }
 }

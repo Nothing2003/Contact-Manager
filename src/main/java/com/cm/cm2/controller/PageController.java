@@ -1,5 +1,7 @@
 package com.cm.cm2.controller;
 
+import java.util.UUID;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,9 +12,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.cm.cm2.entities.User;
+import com.cm.cm2.forms.ForgetPasswordForm;
 import com.cm.cm2.forms.UserForm;
+import com.cm.cm2.helper.Helper;
 import com.cm.cm2.helper.Message;
 import com.cm.cm2.helper.MessageType;
+import com.cm.cm2.services.EmailService;
 import com.cm.cm2.services.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -23,9 +28,11 @@ public class PageController {
 
     @Autowired
     private final UserService userService;
+    private final EmailService emailService;
 
-    public PageController(UserService userService) {
+    public PageController(UserService userService, EmailService emailService) {
         this.userService = userService;
+        this.emailService = emailService;
     }
 
     @GetMapping("/")
@@ -77,6 +84,12 @@ public class PageController {
         if (bindingResult.hasErrors()) {
             return "register";
         }
+        User user1 = userService.getUserByEmail(userForm.getEmail());
+        if (user1 != null) {
+            session.setAttribute("message", Message.builder().contant("This Email Id is already present").type(MessageType.red).build());
+
+            return "register";
+        }
         User user = new User();
         BeanUtils.copyProperties(userForm, user);
         user.setEnable(false);
@@ -87,6 +100,32 @@ public class PageController {
         session.setAttribute("message", message);
         System.out.print(saveUser);
         return "redirect:/register";
+    }
+
+    @GetMapping("/forgetPassword")
+    public String forgetPassword(Model model) {
+        ForgetPasswordForm forgetPasswordForm = new ForgetPasswordForm();
+        model.addAttribute("forget", forgetPasswordForm);
+        return "forget";
+    }
+
+    @PostMapping("/forgetPassword")
+    public String forgetPassword(@Valid @ModelAttribute ForgetPasswordForm forgetPasswordForm, BindingResult bindingResult, HttpSession session) {
+        if (bindingResult.hasErrors()) {
+            session.setAttribute("message", Message.builder().contant("Fill the information").type(MessageType.red).build());
+            return "forget";
+        }
+        User user = userService.getUserByEmail(forgetPasswordForm.getEmail());
+        if (user == null) {
+            session.setAttribute("message", Message.builder().contant("Email id not found").type(MessageType.red).build());
+            return "redirect:/login";
+        }
+        String token = UUID.randomUUID().toString();
+        user.setForgetpasswordToken(token);
+        userService.updateUser(user);
+        emailService.sendEmail(forgetPasswordForm.getEmail(), "For Reset Password", Helper.getLinkForForgetPasswoed(token));
+        session.setAttribute("message", Message.builder().contant("Check your email box").type(MessageType.green).build());
+        return "redirect:/login";
     }
 
 }

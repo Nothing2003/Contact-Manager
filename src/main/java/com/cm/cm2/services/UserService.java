@@ -23,6 +23,10 @@ public interface UserService {
 
     User getUserByEmail(String email);
 
+    User updatePasswordByuserId(String id, String password);
+
     Optional<User> getUserByToken(String token);
+
+    Optional<User> getUserByForgetToken(String token);
 
 }

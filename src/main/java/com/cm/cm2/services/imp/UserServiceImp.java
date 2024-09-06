@@ -53,7 +53,7 @@ public class UserServiceImp implements UserService {
         User user2 = userRepo.findById(user.getUserId()).orElseThrow(() -> new ResourceNotFoundException("User Not found"));
         user2.setName(user.getName());
         user2.setEmail(user.getEmail());
-        user2.setPassword(user.getPassword());
+        user2.setPassword(passwordEncoder.encode(user.getPassword()));
         user2.setAbout(user.getAbout());
         user2.setPhoneNo(user.getPhoneNo());
         user2.setProfilePic(user.getProfilePic());
@@ -98,6 +98,18 @@ public class UserServiceImp implements UserService {
     @Override
     public Optional<User> getUserByToken(String token) {
         return userRepo.findByEmailToken(token);
+    }
+
+    @Override
+    public User updatePasswordByuserId(String id, String password) {
+        User user = userRepo.findById(id).orElse(null);
+        user.setPassword(password);
+        return userRepo.save(user);
+    }
+
+    @Override
+    public Optional<User> getUserByForgetToken(String token) {
+        return userRepo.findByForgetpasswordToken(token);
     }
 
 }

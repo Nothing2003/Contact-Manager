@@ -17,16 +17,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table
 public class User implements UserDetails {
@@ -37,14 +28,12 @@ public class User implements UserDetails {
     private String name;
     @Column(nullable = false, unique = true)
     private String email;
-    @Getter(AccessLevel.NONE)
     private String password;
     @Column(length = 10000)
     private String about;
     @Column(columnDefinition = "TEXT", length = 10000)
     private String profilePic;
     private String phoneNo;
-    @Getter(AccessLevel.NONE)
     private boolean enable = false;
     private boolean emailVefied = false;
     private boolean phoneVerified = false;
@@ -55,6 +44,39 @@ public class User implements UserDetails {
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roleList = new ArrayList<>();
     private String emailToken;
+    private String forgetpasswordToken;
+
+    public String getForgetpasswordToken() {
+        return forgetpasswordToken;
+    }
+
+    public void setForgetpasswordToken(String forgetpasswordToken) {
+        this.forgetpasswordToken = forgetpasswordToken;
+    }
+
+    public User(String userId, String name, String email, String password, String about, String profilePic,
+            String phoneNo, boolean enable, boolean emailVefied, boolean phoneVerified, Providers provider,
+            String providerUserId, List<Contact> contacts, List<String> roleList, String emailToken, String forgetpasswordToken) {
+        this.userId = userId;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.about = about;
+        this.profilePic = profilePic;
+        this.phoneNo = phoneNo;
+        this.enable = enable;
+        this.emailVefied = emailVefied;
+        this.phoneVerified = phoneVerified;
+        this.provider = provider;
+        this.providerUserId = providerUserId;
+        this.contacts = contacts;
+        this.roleList = roleList;
+        this.emailToken = emailToken;
+        this.forgetpasswordToken = forgetpasswordToken;
+    }
+
+    public User() {
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -89,6 +111,122 @@ public class User implements UserDetails {
     @Override
     public boolean isEnabled() {
         return this.enable;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getAbout() {
+        return about;
+    }
+
+    public void setAbout(String about) {
+        this.about = about;
+    }
+
+    public String getProfilePic() {
+        return profilePic;
+    }
+
+    public void setProfilePic(String profilePic) {
+        this.profilePic = profilePic;
+    }
+
+    public String getPhoneNo() {
+        return phoneNo;
+    }
+
+    public void setPhoneNo(String phoneNo) {
+        this.phoneNo = phoneNo;
+    }
+
+    public boolean isEnable() {
+        return enable;
+    }
+
+    public void setEnable(boolean enable) {
+        this.enable = enable;
+    }
+
+    public boolean isEmailVefied() {
+        return emailVefied;
+    }
+
+    public void setEmailVefied(boolean emailVefied) {
+        this.emailVefied = emailVefied;
+    }
+
+    public boolean isPhoneVerified() {
+        return phoneVerified;
+    }
+
+    public void setPhoneVerified(boolean phoneVerified) {
+        this.phoneVerified = phoneVerified;
+    }
+
+    public Providers getProvider() {
+        return provider;
+    }
+
+    public void setProvider(Providers provider) {
+        this.provider = provider;
+    }
+
+    public String getProviderUserId() {
+        return providerUserId;
+    }
+
+    public void setProviderUserId(String providerUserId) {
+        this.providerUserId = providerUserId;
+    }
+
+    public List<Contact> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(List<Contact> contacts) {
+        this.contacts = contacts;
+    }
+
+    public List<String> getRoleList() {
+        return roleList;
+    }
+
+    public void setRoleList(List<String> roleList) {
+        this.roleList = roleList;
+    }
+
+    public String getEmailToken() {
+        return emailToken;
+    }
+
+    public void setEmailToken(String emailToken) {
+        this.emailToken = emailToken;
     }
 
 }
