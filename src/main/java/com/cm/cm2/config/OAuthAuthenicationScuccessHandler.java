@@ -41,9 +41,9 @@ public class OAuthAuthenicationScuccessHandler implements AuthenticationSuccessH
         String authorizedClientRegistrationId = oAuthAuthenicationToken.getAuthorizedClientRegistrationId();
         logger.info(authorizedClientRegistrationId);
         var oathUser = (DefaultOAuth2User) authentication.getPrincipal();
-        // oathUser.getAttributes().forEach((key, value) -> {
-        //     logger.info(key + ":" + value);
-        // });
+        oathUser.getAttributes().forEach((key, value) -> {
+            logger.info(key + ":" + value);
+        });
         User user1 = new User();
         user1.setUserId(UUID.randomUUID().toString());
         user1.setRoleList(List.of(AppCon.rUser));

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -11,7 +12,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import com.cm.cm2.helper.Message;
+import com.cm.cm2.helper.MessageType;
 import com.cm.cm2.services.imp.SCUDS;
+
+import jakarta.servlet.http.HttpSession;
 
 @Configuration
 public class SecurityConfig {
@@ -43,6 +48,17 @@ public class SecurityConfig {
             formLogin.defaultSuccessUrl("/user/profile");
             formLogin.usernameParameter("email");
             formLogin.passwordParameter("password");
+            formLogin.failureHandler((request, response, exception) -> {
+                if (exception instanceof DisabledException) {
+                    HttpSession session = request.getSession();
+                    session.setAttribute("message",
+                            Message.builder().contant("User is disabled. Pless check your mailbox. ").type(MessageType.red).build());
+                    response.sendRedirect("/login");
+                } else {
+                    response.sendRedirect("/login?error=true");
+
+                }
+            });
 
         });
 

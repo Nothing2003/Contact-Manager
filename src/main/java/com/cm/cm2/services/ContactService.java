@@ -24,7 +24,7 @@ public interface ContactService {
 
     Page<Contact> searchByPhoneNumber(String phoneNumber, int page, int size, String sortBy, String direction, User user);
 
-    List<Contact> getByUserId(String id);
+    List<Contact> getByUserInList(User user);
 
     Page<Contact> getByUser(User user, int page, int size, String sortBy, String direction);
 

@@ -58,12 +58,13 @@ public class ContactController {
             return "user/add_contact";
         }
         String username = Helper.getEmailOfLoginUser(authentication);
-        String fileURL = imageService.uploadImage(contactForm.getContactImage());
 
         Contact contact = new Contact();
         BeanUtils.copyProperties(contactForm, contact);
         contact.setUser(userService.getUserByEmail(username));
-        contact.setPic(fileURL);
+        if (contactForm.getContactImage() != null && !contactForm.getContactImage().isEmpty()) {
+            contact.setPic(imageService.uploadImage(contactForm.getContactImage()));
+        }
 
         contactService.saveContact(contact);
         System.out.println(contactForm);
@@ -117,9 +118,49 @@ public class ContactController {
         return "user/search";
     }
 
-    @GetMapping("/delete/{id}")
-    public String deleteContact(@PathVariable("id") String id) {
-        contactService.deleteContact(id);
-        return "redirect:/user/contacts";
+    @GetMapping("/view/{id}")
+    public String updateContactView(
+            @PathVariable("id") String id,
+            Model model) {
+        Contact contact = contactService.getContactById(id);
+        ContactForm contactForm = new ContactForm();
+        contactForm.setName(contact.getName());
+        contactForm.setEmail(contact.getEmail());
+        contactForm.setPhoneNumber(contact.getPhoneNumber());
+        contactForm.setAddress(contact.getAddress());
+        contactForm.setDescription(contact.getDescription());
+        contactForm.setFavorite(contact.isFavorite());
+        contactForm.setWebsiteLink(contact.getWebsiteLink());
+        contactForm.setLinkedInLink(contact.getLinkedInLink());
+        contactForm.setPicture(contact.getPic());
+        model.addAttribute("contactForm", contactForm);
+        model.addAttribute("contactId", id);
+        return "user/updata_contact";
     }
+
+    @PostMapping("/update/{contactId}")
+    public String UpdateContact(@Valid @PathVariable("contactId") String contactId, @ModelAttribute ContactForm contactForm, BindingResult bindingResult, HttpSession session) {
+
+        var contact = contactService.getContactById(contactId);
+        contact.setName(contactForm.getName());
+        contact.setEmail(contactForm.getEmail());
+        contact.setPhoneNumber(contactForm.getPhoneNumber());
+        contact.setAddress(contactForm.getPhoneNumber());
+        contact.setDescription(contactForm.getDescription());
+        contact.setFavorite(contactForm.isFavorite());
+        contact.setWebsiteLink(contactForm.getWebsiteLink());
+        contact.setLinkedInLink(contactForm.getLinkedInLink());
+
+        if (contactForm.getContactImage() != null && !contactForm.getContactImage().isEmpty()) {
+            contact.setPic(imageService.uploadImage(contactForm.getContactImage()));
+        }
+        contactService.updateContact(contact);
+        session.setAttribute("message", Message.builder()
+                .contant("Contact Updated... ")
+                .type(MessageType.green)
+                .build());
+
+        return "redirect:/user/contacts/view/" + contactId;
+    }
+
 }

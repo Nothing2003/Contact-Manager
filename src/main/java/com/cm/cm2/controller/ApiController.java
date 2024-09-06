@@ -12,19 +12,19 @@ import com.cm.cm2.services.ContactService;
 @RequestMapping("/api")
 public class ApiController {
 
-    private final ContactService contactService;
+    private final ContactService contactServiceImp;
 
     public ApiController(ContactService contactService) {
-        this.contactService = contactService;
+        this.contactServiceImp = contactService;
     }
 
     @GetMapping("/contacts/{contactId}")
     public Contact getContact(@PathVariable String contactId) {
-        return contactService.getContactById(contactId);
+        return contactServiceImp.getContactById(contactId);
     }
 
     @GetMapping("/contacts/delete/{contactId}")
     public void getDelete(@PathVariable("contactId") String contactId) {
-        contactService.deleteContact(contactId);
+        contactServiceImp.deleteContact(contactId);
     }
 }

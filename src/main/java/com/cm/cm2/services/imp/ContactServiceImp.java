@@ -31,7 +31,17 @@ public class ContactServiceImp implements ContactService {
 
     @Override
     public Contact updateContact(Contact contact) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Contact contactOld = contactRepo.findById(contact.getContactId()).orElseThrow(() -> new ResourceNotFoundException("Contact not found"));
+        contactOld.setName(contact.getName());
+        contactOld.setEmail(contact.getEmail());
+        contactOld.setPhoneNumber(contact.getPhoneNumber());
+        contactOld.setAddress(contact.getAddress());
+        contactOld.setDescription(contact.getDescription());
+        contactOld.setFavorite(contact.isFavorite());
+        contactOld.setWebsiteLink(contact.getWebsiteLink());
+        contactOld.setLinkedInLink(contact.getLinkedInLink());
+        contactOld.setPic(contact.getPic());
+        return contactRepo.save(contactOld);
     }
 
     @Override
@@ -49,11 +59,10 @@ public class ContactServiceImp implements ContactService {
         contactRepo.deleteById(id);
     }
 
-    @SuppressWarnings("unchecked")
     @Override
-    public List<Contact> getByUserId(String id) {
+    public List<Contact> getByUserInList(User user) {
 
-        return (List<Contact>) contactRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("Contact is not found."));
+        return null;
     }
 
     @Override

@@ -18,12 +18,15 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@AllArgsConstructor
 @NoArgsConstructor
-@Data
 @Entity
 @Table
 public class User implements UserDetails {
@@ -42,7 +45,7 @@ public class User implements UserDetails {
     private String profilePic;
     private String phoneNo;
     @Getter(AccessLevel.NONE)
-    private boolean enable = true;
+    private boolean enable = false;
     private boolean emailVefied = false;
     private boolean phoneVerified = false;
     private Providers provider = Providers.SELF;
@@ -51,6 +54,7 @@ public class User implements UserDetails {
     private List<Contact> contacts = new ArrayList<>();
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roleList = new ArrayList<>();
+    private String emailToken;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
