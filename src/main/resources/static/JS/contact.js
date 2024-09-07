@@ -1,5 +1,6 @@
 
 const baseurl="http://localhost:8080";
+// const baseurl="http://contactmanager.ap-south-1.elasticbeanstalk.com";
 const viewContactsModel=document.getElementById('view_contact');
 
 const options1 = {

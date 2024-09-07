@@ -34,11 +34,13 @@ public class Helper {
 
     public static String getLinkForEmailVarification(String emailToken) {
         String link = "http://localhost:8080/auth/varify-email?token=" + emailToken;
+        // String link = "http://contactmanager.ap-south-1.elasticbeanstalk.com/auth/varify-email?token=" + emailToken;
         return link;
     }
 
     public static String getLinkForForgetPasswoed(String Token) {
         String link = "http://localhost:8080/auth/changePassword?token=" + Token;
+        // String link = "http://contactmanager.ap-south-1.elasticbeanstalk.com/auth/changePassword?token=" + Token;
         return link;
     }
 }

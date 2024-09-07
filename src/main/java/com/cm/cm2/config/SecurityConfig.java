@@ -52,7 +52,7 @@ public class SecurityConfig {
                 if (exception instanceof DisabledException) {
                     HttpSession session = request.getSession();
                     session.setAttribute("message",
-                            Message.builder().contant("User is disabled. Pless check your mailbox. ").type(MessageType.red).build());
+                            Message.builder().contant("User is disabled. Please check your mailbox. ").type(MessageType.red).build());
                     response.sendRedirect("/login");
                 } else {
                     response.sendRedirect("/login?error=true");

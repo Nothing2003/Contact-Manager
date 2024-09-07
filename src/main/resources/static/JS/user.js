@@ -1,4 +1,6 @@
 const deleteModel = document.getElementById('delete_user');
+// const baseurl="http://contactmanager.ap-south-1.elasticbeanstalk.com";
+const baseurl="http://localhost:8080";
 
 const options2 = {
     placement: 'bottom-right',

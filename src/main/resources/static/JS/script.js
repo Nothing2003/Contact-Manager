@@ -9,10 +9,10 @@ function getTheme(){
 
 let current=getTheme();
 document.addEventListener("DOMContentLoaded",()=>{
-    changeTheme(current);
+    changeTheme1(current);
 });
 
-function changeTheme(){
+function changeTheme1(){
 document.querySelector('html').classList.add(current);
 let change= document.querySelector('#theme_change');
 change.addEventListener("click",()=>{console.log("change")
@@ -31,3 +31,29 @@ change.addEventListener("click",()=>{console.log("change")
 });
 
 }
+
+document.addEventListener("DOMContentLoaded",()=>{
+    changeTheme2(current);
+});
+
+
+function changeTheme2(){
+    document.querySelector('html').classList.add(current);
+    let change= document.querySelector('#theme_change1');
+    change.addEventListener("click",()=>{console.log("change")
+       const old=current;
+        if(current=='dark'){
+            current='light'
+        }else{
+            current='dark'
+        }
+        setTheme(current);
+        document.querySelector('html').classList.remove(old);
+        document.querySelector('html').classList.add(current);
+        const text=current=='dark'? "Light":"Dark";
+        change.querySelector('span').textContent=text;
+        
+    });
+    
+    }
+    

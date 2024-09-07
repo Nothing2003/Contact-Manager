@@ -7,5 +7,4 @@ document.querySelector("#imagefileInput").addEventListener("change",function(eve
         
     };
     reader.readAsDataURL(file);
-
 })
