@@ -11,10 +11,11 @@
   <body>
     <div id="content">
       <div
+        th:classappend="${loggedInUser != null} ? 'sm:pl-64  pr-2' : ''"
         class="sm:pt-24 pt-24 flex justify-center flex-col items-center pb-24"
       >
         <section
-          class="bg-blue-600 rounded text-white py-20 animate__animated animate__fadeInDown p-9"
+          class="bg-blue-600 rounded text-white py-20 animate__animated animate__fadeInDown p-9 dark:bg-gray-900 border shadow dark:border-cyan-400 transition duration-300 transform hover:scale-105 shadow-cyan-700"
         >
           <div class="container mx-auto text-center">
             <h2 class="text-4xl font-bold mb-4">Welcome to Contact Manager</h2>
@@ -25,7 +26,7 @@
             </p>
             <a
               th:href="@{'/register'}"
-              class="bg-white text-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition duration-300"
+              class="bg-white text-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition duration-300 transform hover:scale-105 shadow shadow-cyan-600 dark:bg-gray-900 border border-cyan-400"
               >Get Started</a
             >
           </div>
@@ -35,13 +36,13 @@
         <section class="py-20 bg-white dark:bg-gray-900 dark:text-gray-900">
           <div class="container mx-auto text-center">
             <h2
-              class="text-3xl font-bold mb-12 animate__animated animate__fadeInUp"
+              class="text-3xl font-bold mb-12 animate__animated animate__fadeInUp dark:text-white"
             >
               Features
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div
-                class="p-6 bg-gray-100 rounded-full shadow hover:shadow-lg transition duration-300 transform hover:scale-105"
+                class="p-6 bg-gray-100 rounded-2xl shadow hover:shadow-lg transition duration-300 transform hover:scale-105 dark:bg-gray-900 border dark:border-cyan-400 dark:text-white"
               >
                 <i class="fa-solid fa-database text-blue-600 text-4xl mb-4"></i>
                 <h3 class="text-xl font-semibold mb-2">
@@ -53,7 +54,7 @@
                 </p>
               </div>
               <div
-                class="p-6 bg-gray-100 rounded-full shadow hover:shadow-lg transition duration-300 transform hover:scale-105"
+                class="p-6 bg-gray-100 rounded-2xl shadow hover:shadow-lg transition duration-300 transform hover:scale-105 dark:bg-gray-900 border dark:border-cyan-400 dark:text-white"
               >
                 <i class="fas fa-lock text-blue-600 text-4xl mb-4"></i>
                 <h3 class="text-xl font-semibold mb-2">Data Security</h3>
@@ -63,7 +64,7 @@
                 </p>
               </div>
               <div
-                class="p-6 bg-gray-100 rounded-full shadow hover:shadow-lg transition duration-300 transform hover:scale-105"
+                class="p-6 bg-gray-100 rounded-2xl shadow hover:shadow-lg transition duration-300 transform hover:scale-105 dark:bg-gray-900 border dark:border-cyan-400 dark:text-white"
               >
                 <i class="fa-brands fa-hubspot text-blue-600 text-4xl mb-4"></i>
                 <h3 class="text-xl font-semibold mb-2">Sync Across Devices</h3>
@@ -74,7 +75,7 @@
                 </p>
               </div>
               <div
-                class="p-6 bg-gray-100 rounded-full shadow hover:shadow-lg transition duration-300 transform hover:scale-105"
+                class="p-6 bg-gray-100 rounded-2xl shadow hover:shadow-lg transition duration-300 transform hover:scale-105 dark:bg-gray-900 border dark:border-cyan-400 dark:text-white"
               >
                 <i class="fas fa-globe text-blue-600 text-4xl mb-4"></i>
                 <h3 class="text-xl font-semibold mb-2">Easy Access 24/7</h3>
@@ -88,8 +89,10 @@
         </section>
 
         <!-- Call to Action Section -->
-        <section class="bg-blue-600 text-white py-20 rounded-full">
-          <div class="container mx-auto text-center">
+        <section
+          class="bg-blue-600 text-white py-20 rounded-2xl dark:bg-gray-900 border dark:border-cyan-400 dark:text-white transition duration-300 transform hover:scale-105"
+        >
+          <div class="container mx-auto text-center mr-8 ml-8">
             <h2 class="text-3xl font-bold mb-4">
               Ready to Manage Your Contacts?
             </h2>
@@ -99,7 +102,7 @@
             </p>
             <a
               th:href="@{'/register'}"
-              class="bg-white text-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-gray-100 transition duration-300"
+              class="bg-white text-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-gray-100 dark:bg-gray-900 dark:border-cyan-400 dark:text-white transition duration-300 transform hover:scale-105 border dark:border-cyan-400"
               >Create an Account</a
             >
           </div>

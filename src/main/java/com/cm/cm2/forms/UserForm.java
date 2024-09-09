@@ -4,6 +4,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 @Data
 public class UserForm {
@@ -21,5 +22,6 @@ public class UserForm {
     private String about;
     @Size(min = 10, max = 10, message = "Invalid Number")
     private String phoneNo;
+
 
 }

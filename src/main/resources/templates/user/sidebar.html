@@ -1,16 +1,16 @@
 <div th:fragment="sidebar1">
   <aside
     id="logo-sidebar"
-    class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
+    class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 pr-2"
     aria-label="Sidebar"
   >
     <div
       class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800 space-x-3 md:space-x-0 rtl:space-x-reverse"
     >
-      <div class="p-2">
+      <div class="pb-5">
         <img
           th:src="@{${loggedInUser.profilePic}}"
-          class="rounded-full max-w-28 justify-center"
+          class="rounded-full justify-center"
           alt="Profile Pic"
         />
       </div>
@@ -18,13 +18,13 @@
         <a
           th:href="@{/user/profile}"
           type="button"
-          class="col-span-2 text-white bg-green-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-blue-800 md:flex md:w-auto items-center"
+          class="col-span-2 text-white bg-green-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-blue-800 md:flex md:w-auto items-center hover:scale-110"
         >
           <span th:text="${loggedInUser.name}"></span>
         </a>
         <button
           id="theme_change"
-          class="col-span-1 text-white bg-blue-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          class="col-span-1 text-white bg-blue-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 hover:scale-110"
         >
           <i class="fa-solid fa-circle-half-stroke"> </i>
           <span> Light</span>

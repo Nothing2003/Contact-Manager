@@ -1,6 +1,6 @@
 
-const baseurl="http://localhost:8080";
-// const baseurl="http://contactmanager.ap-south-1.elasticbeanstalk.com";
+//const baseurl="http://localhost:8080";
+
 const viewContactsModel=document.getElementById('view_contact');
 
 const options1 = {
@@ -44,7 +44,7 @@ async function loadContactData(id) {
     
         openContactModel();
         } catch (error) {
-            console.log("Error : ",error);
+            // console.log("Error : ",error);
         }
     }
     const deleteContactModel = document.getElementById('delete_contact');
@@ -63,20 +63,17 @@ async function loadContactData(id) {
         id: 'delete_contact',
         override: true
     };
-    
-    // Assuming the Modal library allows merging of these options
     const modal2 = new Modal(deleteContactModel, options2,instanceOptions2);
     
     function openContactModel2() {
         modal2.show();
     }
     
-    async function deleteContactData(id) {  // Corrected function name
+    async function deleteContactData(id) { 
         try {
             const response = await fetch(`${baseurl}/api/contacts/${id}`);
             const data = await response.json();
     
-            // Update the modal with contact data
             document.getElementById('contact_name1').innerHTML = data.name || "N/A";
             document.getElementById('contact_email1').innerHTML = data.email || "N/A";
             document.getElementById('contact_image1').src = data.pic || "/images/image.png";
@@ -90,10 +87,10 @@ async function loadContactData(id) {
             document.getElementById('contact_link1').href = data.LinkedInLink || "#";
             document.getElementById('contact_link_text1').innerHTML = data.LinkedInLink || "None";
             document.getElementById('id').value = data.contactId;
-            // Show the modal after data is loaded
+           
             openContactModel2();
         } catch (error) {
-            console.log("Error:", error);
+            // console.log("Error:", error);
         }
     }
     async function deleteContact() {
@@ -105,6 +102,6 @@ async function loadContactData(id) {
     
             
         } catch (error) {
-            console.log("Error:", error);
+            // console.log("Error:", error);
         }
     }

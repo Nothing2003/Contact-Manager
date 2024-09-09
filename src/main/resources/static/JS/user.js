@@ -1,5 +1,5 @@
 const deleteModel = document.getElementById('delete_user');
-// const baseurl="http://contactmanager.ap-south-1.elasticbeanstalk.com";
+
 const baseurl="http://localhost:8080";
 
 const options2 = {
@@ -17,19 +17,18 @@ const instanceOptions2 = {
     override: true
 };
 
-// Assuming the Modal library allows merging of these options
 const modal3 = new Modal(deleteModel, options2,instanceOptions2);
 
 function openContactModel3() {
     modal3.show();
 }
 
-async function deleteData() {  // Corrected function name
+async function deleteData() {  
     try {
 
         openContactModel3();
     } catch (error) {
-        console.log("Error:", error);
+        // console.log("Error:", error);
     }
 }
 async function deleteAccount() {
@@ -41,6 +40,6 @@ async function deleteAccount() {
 
         
     } catch (error) {
-        console.log("Error:", error);
+        // console.log("Error:", error);
     }
 }

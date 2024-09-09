@@ -31,6 +31,7 @@
                 method="post"
                 class="mt-5"
                 enctype="multipart/form-data"
+                id="myForm"
                 novalidate
               >
                 <label
@@ -215,7 +216,8 @@
                   </button>
 
                   <button
-                    type="reset"
+                    type="button"
+                    onclick="resetForm()"
                     class="px-4 py-2 rounded border bg-blue-600 text-white hover:bg-blue-800"
                   >
                     Reset
@@ -228,5 +230,10 @@
       </div>
     </div>
     <script data-th-src="@{'/JS/admin.js'}"></script>
+    <script>
+      function resetForm() {
+        document.getElementById("myForm").reset();
+      }
+    </script>
   </body>
 </html>

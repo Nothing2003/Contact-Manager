@@ -67,7 +67,7 @@
                     </div>
                     <button
                       type="submit"
-                      class="px-3 py-1.5 bg-gray-200 border border-gray-900 hover:bg-gray-400 rounded dark:bg-gray-500 dark:hover:bg-gray-700 dark:border-gray-400"
+                      class="px-3 py-1.5 bg-gray-200 border border-gray-900 hover:bg-gray-400 rounded dark:bg-gray-500 dark:hover:bg-gray-700 dark:border-gray-400 hover:scale-110"
                     >
                       <i class="fa-solid fa-magnifying-glass"></i>
                     </button>
@@ -77,7 +77,7 @@
                   <button
                     type="button"
                     onclick="exportData()"
-                    class="px-3 py-1.5 bg-green-500 border text-white border-gray-900 hover:bg-green-800 rounded dark:bg-green-500 dark:hover:bg-green-700 dark:border-gray-400 p-2"
+                    class="px-3 py-1.5 bg-green-500 border text-white border-gray-900 hover:bg-green-800 rounded dark:bg-green-500 dark:hover:bg-green-700 dark:border-gray-400 p-2 hover:scale-110"
                   >
                     Export
                   </button>
@@ -218,133 +218,143 @@
               <div>
                 <div class="block md:hidden" th:unless="${contacts.empty}">
                   <div th:object="${c}" th:each="c: ${contacts.getContent()}">
-                    <div
-                      class="items-center justify-between p-1 md:p-2 border-b rounded-t dark:border-gray-600"
-                    >
-                      <div class="flex flex-col items-center p-2">
-                        <img
-                          class="rounded-full w-20 h-20"
-                          th:src="@{${c.pic}}"
-                          onerror="this.src='/images/image.png'"
-                          alt=" image"
-                        />
-                        <div class="flex-col text-center">
-                          <h3
-                            id="contact_name1"
-                            class="text-xl px-2 font-semibold text-gray-900 dark:text-white"
-                          ></h3>
-                          <p>
-                            <span id="contact_description1"></span>
-                          </p>
+                    <div class="hover:scale-110">
+                      <div
+                        class="items-center justify-between p-1 md:p-2 border-b rounded-t dark:border-gray-600"
+                      >
+                        <div class="flex flex-col items-center p-2">
+                          <img
+                            class="rounded-full w-20 h-20"
+                            th:src="@{${c.pic}}"
+                            onerror="this.src='/images/image.png'"
+                            alt=" image"
+                          />
+                          <div class="flex-col text-center">
+                            <h3
+                              id="contact_name1"
+                              class="text-xl px-2 font-semibold text-gray-900 dark:text-white"
+                            ></h3>
+                            <p>
+                              <span id="contact_description1"></span>
+                            </p>
+                          </div>
                         </div>
                       </div>
-                    </div>
 
-                    <!-- Modal body -->
-                    <div class="p-4 md:p-5 space-y-4">
-                      <div
-                        class="relative overflow-x-auto shadow-md sm:rounded-lg"
-                      >
-                        <table
-                          class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                      <!-- Modal body -->
+                      <div class="p-4 md:p-5 space-y-4">
+                        <div
+                          class="relative overflow-x-auto shadow-md sm:rounded-lg"
                         >
-                          <tbody>
-                            <tr
-                              class="border-b border-gray-200 dark:border-gray-700"
-                            >
-                              <th
-                                scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800"
+                          <table
+                            class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                          >
+                            <tbody>
+                              <tr
+                                class="border-b border-gray-200 dark:border-gray-700"
                               >
-                                Name
-                              </th>
-                              <td class="px-6 py-4">
-                                <div
-                                  class="text-base font-semibold"
-                                  th:text="*{name}"
-                                ></div>
-                              </td>
-                            </tr>
-                            <tr
-                              class="border-b border-gray-200 dark:border-gray-700"
-                            >
-                              <th
-                                scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800"
-                              >
-                                Email
-                              </th>
-                              <td class="px-6 py-4">
-                                <div
-                                  class="font-normal text-gray-500"
-                                  th:text="*{email}"
-                                ></div>
-                              </td>
-                            </tr>
-                            <tr
-                              class="border-b border-gray-200 dark:border-gray-700"
-                            >
-                              <th
-                                scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800"
-                              >
-                                Phone Number :
-                              </th>
-                              <td class="px-6 py-4">
-                                <i class="fa-solid fa-square-phone w-4 h-4"></i>
-                                <samp th:text="*{phoneNumber}"></samp>
-                              </td>
-                            </tr>
-                            <tr
-                              class="border-b border-gray-200 dark:border-gray-700"
-                            >
-                              <th
-                                scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800"
-                              >
-                                Action :
-                              </th>
-                              <td class="px-6 py-4">
-                                <button
-                                  th:data-id="${c.contactId}"
-                                  th:onclick="deleteContactData(this.getAttribute('data-id'))"
+                                <th
+                                  scope="row"
+                                  class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800"
                                 >
-                                  <i class="fa-solid fa-trash"></i>
-                                </button>
-                                <a
-                                  th:href="@{'/user/contacts/view/'+*{contactId}}"
+                                  Name
+                                </th>
+                                <td class="px-6 py-4">
+                                  <div
+                                    class="text-base font-semibold"
+                                    th:text="*{name}"
+                                  ></div>
+                                </td>
+                              </tr>
+                              <tr
+                                class="border-b border-gray-200 dark:border-gray-700"
+                              >
+                                <th
+                                  scope="row"
+                                  class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800"
                                 >
-                                  <i class="fa-regular fa-pen-to-square"></i>
-                                </a>
-                                <button
-                                  th:data-id="${c.contactId}"
-                                  th:onclick="loadContactData(this.getAttribute('data-id'))"
+                                  Email
+                                </th>
+                                <td class="px-6 py-4">
+                                  <div
+                                    class="font-normal text-gray-500"
+                                    th:text="*{email}"
+                                  ></div>
+                                </td>
+                              </tr>
+                              <tr
+                                class="border-b border-gray-200 dark:border-gray-700"
+                              >
+                                <th
+                                  scope="row"
+                                  class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800"
                                 >
-                                  <i class="fa-solid fa-eye"></i>
-                                </button>
-                              </td>
-                            </tr>
+                                  Phone Number :
+                                </th>
+                                <td class="px-6 py-4">
+                                  <i
+                                    class="fa-solid fa-square-phone w-4 h-4"
+                                  ></i>
+                                  <samp th:text="*{phoneNumber}"></samp>
+                                </td>
+                              </tr>
+                              <tr
+                                class="border-b border-gray-200 dark:border-gray-700"
+                              >
+                                <th
+                                  scope="row"
+                                  class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800"
+                                >
+                                  Action :
+                                </th>
+                                <td class="px-6 py-4">
+                                  <button
+                                    th:data-id="${c.contactId}"
+                                    th:onclick="deleteContactData(this.getAttribute('data-id'))"
+                                  >
+                                    <i class="fa-solid fa-trash"></i>
+                                  </button>
+                                  <a
+                                    th:href="@{'/user/contacts/view/'+*{contactId}}"
+                                  >
+                                    <i class="fa-regular fa-pen-to-square"></i>
+                                  </a>
+                                  <button
+                                    th:data-id="${c.contactId}"
+                                    th:onclick="loadContactData(this.getAttribute('data-id'))"
+                                  >
+                                    <i class="fa-solid fa-eye"></i>
+                                  </button>
+                                </td>
+                              </tr>
 
-                            <tr
-                              class="border-b border-gray-200 dark:border-gray-700"
-                            >
-                              <th
-                                scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800"
+                              <tr
+                                class="border-b border-gray-200 dark:border-gray-700"
                               >
-                                Social Link:
-                              </th>
-                              <td class="px-6 py-4">
-                                <a th:href="@{*{websiteLink}}" target="_blank">
-                                  <i class="fa-solid fa-globe"></i>
-                                </a>
-                                <a th:href="@{*{LinkedInLink}}" target="_blank">
-                                  <i class="fa-brands fa-linkedin"></i>
-                                </a>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
+                                <th
+                                  scope="row"
+                                  class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800"
+                                >
+                                  Social Link:
+                                </th>
+                                <td class="px-6 py-4">
+                                  <a
+                                    th:href="@{*{websiteLink}}"
+                                    target="_blank"
+                                  >
+                                    <i class="fa-solid fa-globe"></i>
+                                  </a>
+                                  <a
+                                    th:href="@{*{LinkedInLink}}"
+                                    target="_blank"
+                                  >
+                                    <i class="fa-brands fa-linkedin"></i>
+                                  </a>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
                       </div>
                     </div>
                   </div>
